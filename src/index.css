@@ -1,0 +1,36 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: 'Poppins', sans-serif;
+  }
+}
+
+@layer utilities {
+  .bg-normalize {
+    @apply bg-cover bg-no-repeat;
+  }
+  
+  .bg-shorten-mobile {
+    background-image: url(/src/images/bg-shorten-mobile.svg);
+    background-position: top right;
+    @apply bg-no-repeat;
+  }
+
+  .bg-shorten-desktop {
+    background-image: url(/src/images/bg-shorten-desktop.svg);
+    @apply bg-normalize;
+  }
+  
+  .bg-boost-mobile {
+    background-image: url(/src/images/bg-boost-mobile.svg);
+    @apply bg-normalize;
+  }
+
+  .bg-boost-desktop {
+    background-image: url(/src/images/bg-boost-desktop.svg);
+    @apply bg-normalize;
+  }
+}
