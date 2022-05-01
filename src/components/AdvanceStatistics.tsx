@@ -1,23 +1,26 @@
 import cn from 'utils/classNames'
+import BrandRecognition from 'images/icon-brand-recognition.svg'
+import DetailedRecords from 'images/icon-detailed-records.svg'
+import FullyCustomizable from 'images/icon-fully-customizable.svg'
 
 const data = [
   {
     title: 'Brand Recognition',
     description:
       'Boost your brand recognition with each click. Generic links don’t mean a thing. Branded links help instil confidence in your content.',
-    icon: 'icon-brand-recognition.svg',
+    icon: BrandRecognition,
   },
   {
     title: 'Detailed Records',
     description:
       'Gain insights into who is clicking your links. Knowing when and where people engage with your content helps inform better decisions.',
-    icon: 'icon-detailed-records.svg',
+    icon: DetailedRecords,
   },
   {
     title: 'Fully Customizable',
     description:
       'Improve brand awareness and content discoverability through customizable links, supercharging audience engagement.',
-    icon: 'icon-fully-customizable.svg',
+    icon: FullyCustomizable,
   },
 ]
 
@@ -41,11 +44,7 @@ const AdvanceStatistics = () => {
               )}
             >
               <div className='bg-violet-dark p-5 rounded-full w-max mx-auto -translate-y-8 lg:mx-0'>
-                <img
-                  className='w-8 h-8'
-                  src={'/src/images/' + item.icon}
-                  alt={`${item.title} icon`}
-                />
+                <img className='w-8 h-8' src={item.icon} alt={`${item.title} icon`} />
               </div>
               <h3 className='font-bold text-2xl'>{item.title}</h3>
               <p className='text-sm text-violet-grayish mt-3 lg:text-base'>{item.description}</p>

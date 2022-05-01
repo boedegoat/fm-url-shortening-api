@@ -3,6 +3,7 @@ import capitalize from 'utils/capitalize'
 import cn from 'utils/classNames'
 import PrimaryButton from './PrimaryButton'
 import Wrapper from './Wrapper'
+import Logo from 'images/logo.svg'
 
 const navLinks = ['features', 'pricing', 'resources']
 
@@ -13,7 +14,7 @@ const Nav = () => {
         {/* logo */}
         <div className='flex'>
           <a href='#'>
-            <img src='/src/images/logo.svg' alt='Shortly logo' />
+            <img src={Logo} alt='Shortly logo' />
           </a>
           <div className='hidden lg:flex items-center ml-10 space-x-6'>
             {navLinks.map((link) => (

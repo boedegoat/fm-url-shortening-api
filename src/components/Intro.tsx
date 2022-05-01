@@ -1,12 +1,13 @@
 import PrimaryButton from './PrimaryButton'
 import Wrapper from './Wrapper'
+import IllustrationWorking from 'images/illustration-working.svg'
 
 const Intro = () => {
   return (
     <div className='lg:mt-12'>
       <Wrapper className='text-center flex flex-col lg:flex-row-reverse lg:text-left'>
         <div className='-mr-52 pl-5 flex-shrink-0'>
-          <img src='/src/images/illustration-working.svg' alt='illustration working' />
+          <img src={IllustrationWorking} alt='illustration working' />
         </div>
         <div className='mt-10 lg:pr-32'>
           <h1 className='font-bold text-4xl lg:text-7xl text-violet-so-dark'>
