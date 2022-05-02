@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import toast from 'react-hot-toast'
 import cn from 'utils/classNames'
 import PrimaryButton from './PrimaryButton'
@@ -16,6 +16,14 @@ const LinkShorter = () => {
   const linkInputRef = useRef<HTMLInputElement>(null)
 
   const [results, setResults] = useState<Result[]>([])
+
+  // on first render, grab links from localStorage, then store into results
+  useEffect(() => {
+    if (!localStorage.links) {
+      localStorage.links = JSON.stringify([])
+    }
+    setResults(JSON.parse(localStorage.links))
+  }, [])
 
   const shortenLink: React.FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault()
@@ -36,11 +44,14 @@ const LinkShorter = () => {
         throw data
       }
       const { result } = data
-      setResults((results) => [
-        ...results,
-        { originalLink: result.original_link, shortLink: result.full_short_link },
-      ])
-      console.log(data)
+      setResults((results) => {
+        const newResults = [
+          ...results,
+          { originalLink: result.original_link, shortLink: result.full_short_link },
+        ]
+        localStorage.links = JSON.stringify(newResults)
+        return newResults
+      })
       toast.success('short link generated', { id: formToast })
       setLink('')
     } catch (err: any) {
@@ -83,7 +94,7 @@ const LinkShorter = () => {
       {/* results */}
       <div className='mt-6 space-y-6'>
         {results.map((result, idx) => (
-          <ShortLinkItem {...{ result, idx }} />
+          <ShortLinkItem key={idx} result={result} />
         ))}
       </div>
     </section>
@@ -92,7 +103,7 @@ const LinkShorter = () => {
 
 export default LinkShorter
 
-const ShortLinkItem = ({ result, idx }: { result: Result; idx: number }) => {
+const ShortLinkItem = ({ result }: { result: Result }) => {
   const [copied, setCopied] = useState(false)
 
   const copyLink = (shortLink: string) => {
@@ -105,10 +116,7 @@ const ShortLinkItem = ({ result, idx }: { result: Result; idx: number }) => {
   }
 
   return (
-    <div
-      key={idx}
-      className='bg-white rounded-lg divide-y divide-gray flex flex-col lg:flex-row lg:divide-y-0 lg:items-center'
-    >
+    <div className='bg-white rounded-lg divide-y divide-gray flex flex-col lg:flex-row lg:divide-y-0 lg:items-center'>
       <div className='p-4 lg:p-6 truncate text-violet-so-dark'>{result.originalLink}</div>
       <div className='p-4 lg:p-6 flex flex-col lg:flex-row lg:items-center lg:ml-auto'>
         <div className='text-cyan lg:mr-5'>{result.shortLink}</div>
